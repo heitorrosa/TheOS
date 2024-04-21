@@ -55,14 +55,8 @@ FemboyOS is an open-source custom Windows OS alternative based on Windows 10 Ser
 
 
 #
-* [Raise the Clock Interrupt Frequency (Timer Resolution)](https://github.com/amitxv/PC-Tuning/blob/main/docs/post-install.md#raise-the-clock-interrupt-frequency-timer-resolution)  | Default Timer Resolution value is 0.507ms
-* [Configure Device Manager](https://github.com/amitxv/PC-Tuning/blob/main/docs/post-install.md#configure-device-manager)
-* [Message Signaled Interrupts](https://github.com/amitxv/PC-Tuning/blob/main/docs/post-install.md#message-signaled-interrupts)
-* [Disable Desktop Composition (DWM)](https://github.com/amitxv/PC-Tuning/blob/main/docs/post-install.md#disable-desktop-composition-dwm)
+* [Raise the Clock Interrupt Frequency (Timer Resolution)](https://github.com/amitxv/TimerResolution)  | Default Timer Resolution value is 0.507ms
 * [Calypto's Latency Guide](https://docs.google.com/document/d/1c2-lUJq74wuYK1WrA_bIvgb89dUN0sj8-hO3vqmrau4)
-
-
-## **[Hone](https://github.com/auraside/Hone) has much of the tweaks listed above and is easier to setup. Give it a try. 😉**
 
 
 ## Additional Tips
