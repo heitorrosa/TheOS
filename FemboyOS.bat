@@ -28,23 +28,21 @@ move "%userprofile%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startu
 :: Windows Server 2025 & Windows Server 2022 Support Checker
 ::
 
-:: Server 2025 = 11
-:: Server 2022 = 10
+:: Server 2025 = S25
+:: Server 2022 = S22
 
 call :FemboyOS
 
-set OS_NAME=
-set OS_VERSION=
 for /f "tokens=*" %%a in ('systeminfo ^| findstr /B /C:"OS Name"') do set OS_NAME=%%a
 
 if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standard" (
-    set OS_VERSION=10
-    echo %OS_VERSION% >> report.txt
+    set OS_VERSION=S22
+    echo S22 >> report.txt
     goto device_checker
 
 ) else if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2025 Standard" (
-    set OS_VERSION=11
-    echo %OS_VERSION% >> report.txt
+    set OS_VERSION=S25
+    echo S25 >> report.txt
     goto device_checker
 
 
@@ -62,22 +60,16 @@ if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standa
 :: https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-systemenclosure
 ::
 
-:: Destkop = D
-:: Laptop = L
+:: LAPTOP
+:: PC
 
 call :FemboyOS
 
-set OS_CHASSIS=
-for /f "delims={}" %%i in ('wmic systemenclosure get chassistypes ^| findstr "{"') do @set "OS_CHASSIS=%%i"
+for /f "delims=:{}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes ^| findstr [0-9]') do set "CHASSIS=%%a"
+set "DEVICE_TYPE=PC"
+for %%a in (8 9 10 11 12 13 14 18 21 30 31 32) do if "%CHASSIS%" == "%%a" (set "DEVICE_TYPE=LAPTOP")
 
-set "desktop=3 4 5 7 16 17 18 19 23 24"
-set "laptop=9 10 6 8 12 13 14 15 20 21 22 30 31 32"
-
-set OS_DEVICE=
-for %%i in (%desktop%) do if "%OS_CHASSIS%"=="%%i" set OS_DEVICE=D >> report.txt
-for %%i in (%laptop%) do if "%OS_CHASSIS%"=="%%i" set OS_DEVICE=L >> report.txt
-echo %OS_DEVICE% >> report.txt
-
+echo %DEVICE_TYPE% >> report.txt
 
 
 :: ================================================================================================================
