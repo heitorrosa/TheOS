@@ -26,11 +26,6 @@ SETLOCAL EnableDelayedExpansion
 chcp 65001 >NUL 2>&1
 mode 72,12 >NUL 2>&1
 
-:: Move the Import File
-move "%userprofile%\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup\Import.bat" "C:\Windows\Temp" >> report.txt
-
-
-
 :: ================================================================================================================
 
 
