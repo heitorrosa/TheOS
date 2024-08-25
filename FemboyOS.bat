@@ -4,6 +4,18 @@ title FemboyOS @heitorrosa
 :: Execute the script as administrator (Not needeed, UAC already disabled)
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
+:: Checks if you are running the script at SYSTEM privileges and install MinSudo if needed
+for /f "tokens=*" %%a in ('whoami') do set PRIVILEGES=%%a
+
+if "%PRIVILEGES%"=="nt authority\system" (
+   goto script
+
+) else (
+    curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/FemboyOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1 & C:\Windows\System32\MinSudo.exe /S /TI /P FemboyOS.bat >NUL 2>&1
+)
+
+:script
+
 powershell Set-ExecutionPolicy Unrestricted >> report.txt
 
 SETLOCAL EnableExtensions DisableDelayedExpansion
@@ -85,6 +97,7 @@ call :FemboyOS
 
 :: Chocolatey Installation
 powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
+
 
 pause
 
