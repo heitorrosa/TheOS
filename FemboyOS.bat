@@ -82,6 +82,16 @@ echo %DEVICE_TYPE% >> report.txt
 :: ================================================================================================================
 
 
+:Server Configurations
+::
+:: Windows Server configurations
+::
+
+:: Installation of the Wireless Connectivity
+powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
+reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
+
+
 
 :Dependencies
 ::
