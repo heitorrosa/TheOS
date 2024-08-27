@@ -82,7 +82,7 @@ echo %DEVICE_TYPE% >> report.txt
 :: ================================================================================================================
 
 
-:Server Configurations
+:ServerConfigurations
 ::
 :: Windows Server configurations
 ::
