@@ -43,20 +43,17 @@ call :FemboyOS
 for /f "tokens=*" %%a in ('systeminfo ^| findstr /B /C:"OS Name"') do set OS_NAME=%%a
 
 if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standard" (
-    set OS_VERSION=S22
-    echo S22 >> report.txt
+    set OS_VERSION=S22 & echo S22 >> report.txt
     goto device_checker
 
 ) else if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2025 Standard" (
-    set OS_VERSION=S25
-    echo S25 >> report.txt
+    set OS_VERSION=S25 & echo S25 >> report.txt
     goto device_checker
 
 
 ) else (
     echo Your Windows Version is not supported
-    pause
-    exit /b
+    pause & exit /b
 )
 
 
