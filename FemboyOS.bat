@@ -97,6 +97,9 @@ powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
 :: Remove the User's Account Password
 net user Administrator "" /active:yes >> report.txt
 
+:: Uninstall Azure Arc Setup
+powershell Uninstall-WindowsFeature -Name AzureArcSetup >> report.txt
+
 :Dependencies
 ::
 :: Installation of required dependencies and a Web Browser
