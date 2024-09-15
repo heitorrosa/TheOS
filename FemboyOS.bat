@@ -96,6 +96,7 @@ powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
 
 :: Remove the User's Account Password
 net user Administrator "" >> report.txt
+net user Administrator /active:true >> report.txt
 
 :Dependencies
 ::
