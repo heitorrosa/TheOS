@@ -88,6 +88,12 @@ echo %DEVICE_TYPE% >> report.txt
 powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
+:: Disables Password Complexity Requirements
+powershell "secedit /export /cfg c:\secpol.cfg"
+powershell -ExecutionPolicy Bypass "(gc C:\secpol.cfg).replace('PasswordComplexity = 1', 'PasswordComplexity = 0') | Out-File C:\secpol.cfg"
+powershell "secedit /configure /db c:\windows\security\local.sdb /cfg c:\secpol.cfg /areas SECURITYPOLICY"
+powershell rm -force c:\secpol.cfg -confirm:$false
+
 :Dependencies
 ::
 :: Installation of required dependencies and a Web Browser
