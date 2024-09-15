@@ -97,6 +97,13 @@ powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
 :: Remove the User's Account Password
 net user Administrator "" /active:yes >> report.txt
 
+:: Install Powershell Windows Update Service and Run Updates
+powershell Install-Module PSWindowsUpdate -Force >> report.txt
+powershell Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot >> report.txt
+
+:: Remove the RunOnce entry from the System if needed
+
+
 :: Uninstall Azure Arc Setup
 powershell Uninstall-WindowsFeature -Name AzureArcSetup >> report.txt
 
