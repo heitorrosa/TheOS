@@ -105,7 +105,7 @@ powershell Install-Module PSWindowsUpdate -Force >> report.txt
 powershell Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot >> report.txt
 
 :: Remove the RunOnce entry from the System if needed
-reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS >> report.txt
 
 :: Uninstall Azure Arc Setup
 powershell Uninstall-WindowsFeature -Name AzureArcSetup >> report.txt
