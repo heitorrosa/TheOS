@@ -140,6 +140,6 @@ echo  !ESC![96m█████╗  █████╗  ██╔████╔�
 echo  ██╔══╝  ██╔══╝  ██║╚██╔╝██║██╔══██╗██║   ██║  ╚██╔╝  ██║   ██║╚════██║
 echo  !ESC![95m██║     ███████╗██║ ╚═╝ ██║██████╔╝╚██████╔╝   ██║   ╚██████╔╝███████║!ESC![0m
 echo  !ESC![95m╚═╝     ╚══════╝╚═╝     ╚═╝╚═════╝  ╚═════╝    ╚═╝    ╚═════╝ ╚══════╝!ESC![0m
-echo !ESC![95m You can get the code from this script at @heitorrosa at Github!ESC![0m
+echo !ESC![95m You can get the code from this script at @heitorrosa in Github!ESC![0m
 echo.
 goto :eof
