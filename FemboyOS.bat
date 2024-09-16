@@ -84,6 +84,9 @@ echo %DEVICE_TYPE% >> report.txt
 :: Windows Server configurations
 ::
 
+:: Adds a RunOnce Registry for continuing the script
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
+
 :: Installation of the Wireless Connectivity
 powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
@@ -102,7 +105,7 @@ powershell Install-Module PSWindowsUpdate -Force >> report.txt
 powershell Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot >> report.txt
 
 :: Remove the RunOnce entry from the System if needed
-
+reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
 
 :: Uninstall Azure Arc Setup
 powershell Uninstall-WindowsFeature -Name AzureArcSetup >> report.txt
