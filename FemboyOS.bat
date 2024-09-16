@@ -85,11 +85,19 @@ echo %DEVICE_TYPE% >> report.txt
 :: Windows Server configurations
 ::
 
-:: Adds a RunOnce Registry for continuing the script
+:: Chocolatey Installation
+powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
+choco feature enable -n=allowGlobalConfirmation
+choco feature enable -n useFipsCompliantChecksums
+choco upgrade all
+
+
+:: Adds a Run Registry for continuing the script
 echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt & echo y >> report.txt
 
 :: Installation of the Wireless Connectivity
-powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
+choco install WirelessNetworking --source windowsfeatures
+:: powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
 :: Disables Password Complexity Requirements
@@ -105,7 +113,7 @@ net user Administrator "" /active:yes >> report.txt
 powershell Install-Module PSWindowsUpdate -Force >> report.txt
 powershell Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot >> report.txt
 
-:: Remove the RunOnce entry from the System if needed
+:: Remove the Run entry from the System if needed
 echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS >> report.txt
 
 :: Uninstall Azure Arc Setup
@@ -118,11 +126,7 @@ powershell Uninstall-WindowsFeature -Name AzureArcSetup >> report.txt
 
 call :FemboyOS
 
-:: Chocolatey Installation
-powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
-choco feature enable -n=allowGlobalConfirmation
-choco feature enable -n useFipsCompliantChecksums
-choco upgrade all
+
 
 
 pause & exit /b
