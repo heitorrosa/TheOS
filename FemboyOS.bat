@@ -87,7 +87,7 @@ echo %DEVICE_TYPE% >> report.txt
 :: Chocolatey Installation
 set "chocodir=C:\ProgramData\chocolatey\choco.exe"
 powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
-C:\ProgramData\chocolatey\choco.exe feature enable -n=allowGlobalConfirmation  >> report.txt & C:\ProgramData\chocolatey\choco.exe feature enable -n useFipsCompliantChecksums >> report.txt & C:\ProgramData\chocolatey\choco.exe upgrade all >> report.txt
+%chocodir% feature enable -n=allowGlobalConfirmation  >> report.txt & %chocodir% feature enable -n useFipsCompliantChecksums >> report.txt & %chocodir% upgrade all >> report.txt
 
 
 :: Adds a Run Registry for continuing the script
