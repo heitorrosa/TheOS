@@ -94,7 +94,7 @@ powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.Service
 echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
 
 :: Installation of the Wireless Connectivity
-C:\ProgramData\chocolatey\choco.exe install WirelessNetworking --source windowsfeatures >> report.txt
+%chocodir% install WirelessNetworking --source windowsfeatures >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
 :: Disables Password Complexity Requirements
@@ -107,7 +107,8 @@ powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
 net user Administrator "" /active:yes >> report.txt
 
 :: Install Powershell Windows Update Service and Run Updates
-powershell Install-Module PSWindowsUpdate -Force >> report.txt
+choco install pswindowsupdate
+:: powershell Install-Module PSWindowsUpdate -Force >> report.txt
 powershell Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot >> report.txt
 
 :: Remove the Run entry from the System if needed
