@@ -108,7 +108,7 @@ net user Administrator "" /active:yes >> report.txt
 
 :: Install Powershell Windows Update Service and Run Updates
 %chocodir% install PSWindowsUpdate >> report.txt
-powershell Get-WuInstall -AcceptAll -AutoReboot >> report.txt
+MinSudo powershell Get-WuInstall -AcceptAll -AutoReboot >> report.txt
 
 :: Remove the Run entry from the System if needed
 echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS >> report.txt
