@@ -93,7 +93,7 @@ choco upgrade all
 
 
 :: Adds a Run Registry for continuing the script
-echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt & echo y >> report.txt
+echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
 
 :: Installation of the Wireless Connectivity
 choco install WirelessNetworking --source windowsfeatures
