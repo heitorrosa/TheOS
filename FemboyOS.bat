@@ -12,7 +12,6 @@ if "%PRIVILEGES%"=="nt authority\system" (
 
 ) else (
     curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/FemboyOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1 & C:\Windows\System32\MinSudo.exe /S /TI /P %~dpnx0 >NUL 2>&1
-    :: goto script
 )
 
 :script
