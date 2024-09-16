@@ -107,14 +107,14 @@ powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
 net user Administrator "" /active:yes >> report.txt
 
 :: Install Powershell Windows Update Service and Run Updates
-choco install PSWindowsUpdate >> report.txt
+%chocodir% install PSWindowsUpdate >> report.txt
 powershell Get-WuInstall -AcceptAll -AutoReboot >> report.txt
 
 :: Remove the Run entry from the System if needed
 echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS >> report.txt
 
 :: Uninstall Azure Arc Setup
-choco uninstall AzureArcSetup --source WindowsFeatures >> report.txt
+%chocodir% uninstall AzureArcSetup --source WindowsFeatures >> report.txt
 
 :Dependencies
 ::
