@@ -53,7 +53,7 @@ if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standa
 
 ) else (
     echo Your Windows Version is not supported
-    pause exit /b
+    pause & exit /b
 )
 
 
