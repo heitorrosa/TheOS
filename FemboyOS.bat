@@ -52,8 +52,8 @@ if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standa
 
 
 ) else (
-    echo Your Windows Version is not supported
-    pause & exit /b
+    echo Your Windows Version is not supported >> report.txt
+    exit /b
 )
 
 
@@ -85,7 +85,7 @@ echo %DEVICE_TYPE% >> report.txt
 ::
 
 :: Adds a RunOnce Registry for continuing the script
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
+echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt & echo y >> report.txt
 
 :: Installation of the Wireless Connectivity
 powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
@@ -105,7 +105,7 @@ powershell Install-Module PSWindowsUpdate -Force >> report.txt
 powershell Install-WindowsUpdate -MicrosoftUpdate -AcceptAll -AutoReboot >> report.txt
 
 :: Remove the RunOnce entry from the System if needed
-reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS >> report.txt
+echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\RunOnce" /v FemboyOS >> report.txt
 
 :: Uninstall Azure Arc Setup
 powershell Uninstall-WindowsFeature -Name AzureArcSetup >> report.txt
