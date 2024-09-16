@@ -87,16 +87,16 @@ echo %DEVICE_TYPE% >> report.txt
 
 :: Chocolatey Installation
 powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
-choco feature enable -n=allowGlobalConfirmation
-choco feature enable -n useFipsCompliantChecksums
-choco upgrade all
+C:\ProgramData\chocolatey\choco.exe feature enable -n=allowGlobalConfirmation
+C:\ProgramData\chocolatey\choco.exe feature enable -n useFipsCompliantChecksums
+C:\ProgramData\chocolatey\choco.exe upgrade all
 
 
 :: Adds a Run Registry for continuing the script
 echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
 
 :: Installation of the Wireless Connectivity
-choco install WirelessNetworking --source windowsfeatures
+C:\ProgramData\chocolatey\choco.exe install WirelessNetworking --source windowsfeatures
 :: powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
