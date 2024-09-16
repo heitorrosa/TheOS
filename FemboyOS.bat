@@ -11,8 +11,8 @@ if "%PRIVILEGES%"=="nt authority\system" (
    goto script
 
 ) else (
-    :: curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/FemboyOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1 & C:\Windows\System32\MinSudo.exe /S /TI /P %~dpnx0 >NUL 2>&1
-    goto script
+    curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/FemboyOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1 & C:\Windows\System32\MinSudo.exe /S /TI /P %~dpnx0 >NUL 2>&1
+    :: goto script
 )
 
 :script
@@ -87,17 +87,14 @@ echo %DEVICE_TYPE% >> report.txt
 
 :: Chocolatey Installation
 powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
-C:\ProgramData\chocolatey\choco.exe feature enable -n=allowGlobalConfirmation
-C:\ProgramData\chocolatey\choco.exe feature enable -n useFipsCompliantChecksums
-C:\ProgramData\chocolatey\choco.exe upgrade all
+C:\ProgramData\chocolatey\choco.exe feature enable -n=allowGlobalConfirmation  >> report.txt & C:\ProgramData\chocolatey\choco.exe feature enable -n useFipsCompliantChecksums >> report.txt & C:\ProgramData\chocolatey\choco.exe upgrade all >> report.txt
 
 
 :: Adds a Run Registry for continuing the script
 echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
 
 :: Installation of the Wireless Connectivity
-C:\ProgramData\chocolatey\choco.exe install WirelessNetworking --source windowsfeatures
-:: powershell Install-WindowsFeature -Name Wireless-Networking >> report.txt
+C:\ProgramData\chocolatey\choco.exe install WirelessNetworking --source windowsfeatures >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
 :: Disables Password Complexity Requirements
