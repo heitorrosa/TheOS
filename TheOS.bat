@@ -1,5 +1,5 @@
 @echo off
-title FemboyOS @heitorrosa
+title TheOS @heitorrosa
 
 :: Execute the script as administrator (Not needeed, UAC already disabled)
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
@@ -38,7 +38,7 @@ mode 72,12 >NUL 2>&1
 :: Server 2025 = S25
 :: Server 2022 = S22
 
-call :FemboyOS
+call :TheOS
 
 for /f "tokens=*" %%a in ('systeminfo ^| findstr /B /C:"OS Name"') do set OS_NAME=%%a
 
@@ -91,7 +91,7 @@ powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.Service
 
 
 :: Adds a Run Registry for continuing the script
-echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS /t REG_SZ /d "%~dpnx0" >> report.txt
+echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v TheOS /t REG_SZ /d "%~dpnx0" >> report.txt
 
 :: Installation of the Wireless Connectivity
 %chocodir% install WirelessNetworking --source WindowsFeatures >> report.txt
@@ -111,7 +111,7 @@ net user Administrator "" /active:yes >> report.txt
 MinSudo powershell Get-WuInstall -AcceptAll -AutoReboot >> report.txt
 
 :: Remove the Run entry from the System if needed
-echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v FemboyOS >> report.txt
+echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v TheOS >> report.txt
 
 :: Uninstall Azure Arc Setup
 %chocodir% uninstall AzureArcSetup --source WindowsFeatures >> report.txt
@@ -130,7 +130,7 @@ pause & exit /b
 
 
 
-:FemboyOS
+:TheOS
 cls
 echo.
 echo  !ESC![95m███████╗███████╗███╗   ███╗██████╗  ██████╗ ██╗   ██╗ ██████╗ ███████╗!ESC![0m
