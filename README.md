@@ -1,5 +1,5 @@
-# **FemboyOS**
-FemboyOS is an open-source custom Windows OS with support for Windows Server 2022 Standard and Windows Server 2025 Standard with a lot of debloats and optimizations for your system,focusing on optimizing your DPC Latency and overall system stability.
+# **TheOS**
+TheOS is an open-source custom Windows OS with support for Windows Server 2022 Standard and Windows Server 2025 Standard with a lot of debloats and optimizations for your system,focusing on optimizing your DPC Latency and overall system stability.
 
 [![Download zip](https://custom-icon-badges.herokuapp.com/badge/-Download-gray?style=for-the-badge&logo=download&logoColor=white "Download zip")]() <a href="https://discord.gg/hHySwtcZHy" target="_blank"><img src="https://img.shields.io/badge/Discord-7289DA?style=for-the-badge&logo=discord&logoColor=white" target="_blank"></a> 
 
