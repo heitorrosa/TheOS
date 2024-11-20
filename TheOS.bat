@@ -4,14 +4,11 @@ title TheOS @heitorrosa
 :: Execute the script as administrator (Not needeed, UAC already disabled)
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
-:: Checks if you are running the script at SYSTEM privileges and install MinSudo if needed
-for /f "tokens=*" %%a in ('whoami') do set PRIVILEGES=%%a
-
-if "%PRIVILEGES%"=="nt authority\system" (
-   goto script
-
+:: Checks if MinSudo exists in System and installs it if needed
+if not exist "C:\Windows\System32\MinSudo.exe" (
+   curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/FemboyOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1
 ) else (
-    curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/FemboyOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1 & C:\Windows\System32\MinSudo.exe /S /TI /P %~dpnx0 >NUL 2>&1
+    goto script
 )
 
 :script
