@@ -67,7 +67,7 @@ if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standa
 :: LAPTOP
 :: PC
 
-call :FemboyOS
+call :TheOS
 
 for /f "delims=:{}" %%a in ('wmic path Win32_SystemEnclosure get ChassisTypes ^| findstr [0-9]') do set "CHASSIS=%%a"
 set "DEVICE_TYPE=PC"
@@ -121,7 +121,7 @@ echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersio
 :: Installation of required dependencies and a Web Browser
 ::
 
-call :FemboyOS
+call :TheOS
 
 
 
