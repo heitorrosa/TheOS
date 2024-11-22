@@ -6,7 +6,7 @@ cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) &&
 
 :: Checks if MinSudo exists in System and installs it if needed
 if not exist "C:\Windows\System32\MinSudo.exe" (
-   curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/FemboyOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1
+   curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/TheOS/raw/femboyos/files/MinSudo.exe" >NUL 2>&1
 ) else (
     goto script
 )
