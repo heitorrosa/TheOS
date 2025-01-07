@@ -125,7 +125,11 @@ reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Ad
 
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "HubMode" /t REG_DWORD /d "1" /f >> report.txt
 
-::
+reg add "HKEY_CURRENT_USER\Keyboard Layout\Toggle" /v "Language HotKey" /t REG_DWORD /d "3" /f >> report.txt
+reg add "HKEY_CURRENT_USER\Keyboard Layout\Toggle" /v "Layout HotKey" /t REG_DWORD /d "3" /f >> report.txt
+reg add "HKEY_USERS\.DEFAULT\Keyboard Layout\Toggle" /v "Language HotKey" /t REG_DWORD /d "3" /f >> report.txt
+reg add "HKEY_USERS\.DEFAULT\Keyboard Layout\Toggle" /v "Layout HotKey" /t REG_DWORD /d "3" /f >> report.txt
+
 :Dependencies
 ::
 :: Installation of required dependencies and a Web Browser
