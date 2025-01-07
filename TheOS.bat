@@ -88,9 +88,8 @@ powershell -ExecutionPolicy Bypass "(gc C:\secpol.cfg).replace('PasswordComplexi
 powershell "secedit /configure /db c:\windows\security\local.sdb /cfg c:\secpol.cfg /areas SECURITYPOLICY" >> report.txt
 powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
 
-:: Disable Shutdown Confirmation Prompt & CAD at Lock Screen
+:: Disable CAD at Lock Screen
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /t REG_DWORD /d "1" /f >NUL 2>&1
-reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability" /v "ShutdownReasonUI" /t REG_DWORD /d "0" /f >NUL 2>&1
 
 :: Remove the User's Account Password
 net user Administrator "" /active:yes >> report.txt
