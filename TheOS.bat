@@ -59,6 +59,11 @@ echo %DEVICE_TYPE% >> report.txt
 
 :: ================================================================================================================
 
+:Activate
+::
+:: Activating Windows with MassGrave KMS38
+::
+powershell -Command "& ([ScriptBlock]::Create((irm https://get.activated.win))) /S /KMS38" >> report.txt
 
 :ServerConfigurations
 ::
