@@ -78,11 +78,19 @@ powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.Service
 %chocodir% install WirelessNetworking --source WindowsFeatures >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
+:: Enable Sound
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
+
 :: Disables Password Complexity Requirements
 powershell "secedit /export /cfg c:\secpol.cfg" >> report.txt
 powershell -ExecutionPolicy Bypass "(gc C:\secpol.cfg).replace('PasswordComplexity = 1', 'PasswordComplexity = 0') | Out-File C:\secpol.cfg" >> report.txt
 powershell "secedit /configure /db c:\windows\security\local.sdb /cfg c:\secpol.cfg /areas SECURITYPOLICY" >> report.txt
 powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
+
+:: Disable Shutdown Confirmation Prompt & CAD at Lock Screen
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "DisableCAD" /t REG_DWORD /d "1" /f >NUL 2>&1
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability" /v "ShutdownReasonUI" /t REG_DWORD /d "0" /f >NUL 2>&1
 
 :: Remove the User's Account Password
 net user Administrator "" /active:yes >> report.txt
@@ -92,10 +100,6 @@ net user Administrator "" /active:yes >> report.txt
 
 :: Disable Server Manager at Startup
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager" /v "DoNotOpenServerManagerAtLogon" /t REG_DWORD /d "1" /f >> report.txt
-
-:: Enable Sound
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
 :: Taskbar Tweaks
 reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f >> report.txt
