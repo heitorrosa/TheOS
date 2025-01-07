@@ -68,7 +68,9 @@ echo %DEVICE_TYPE% >> report.txt
 :: Chocolatey Installation
 set "chocodir=C:\ProgramData\chocolatey\choco.exe"
 powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
-%chocodir% feature enable -n=allowGlobalConfirmation  >> report.txt & %chocodir% feature enable -n useFipsCompliantChecksums >> report.txt & %chocodir% upgrade all >> report.txt
+%chocodir% feature enable -n=allowGlobalConfirmation  >> report.txt
+%chocodir% feature enable -n useFipsCompliantChecksums >> report.txt
+%chocodir% upgrade all >> report.txt
 
 :: Installation of the Wireless Connectivity
 %chocodir% install WirelessNetworking --source WindowsFeatures >> report.txt
@@ -103,6 +105,8 @@ reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "
 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableActionCenter" /t REG_DWORD /d "1" /f >> report.txt
 reg add "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableNotificationCenter" /t REG_DWORD /d "1" /f >> report.txt
+
+reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "TaskbarGlomLevel" /t REG_DWORD /d "2" /f >> report.txt
 
 ::
 :Dependencies
