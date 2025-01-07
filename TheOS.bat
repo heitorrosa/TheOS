@@ -86,6 +86,24 @@ net user Administrator "" /active:yes >> report.txt
 :: Uninstall Azure Arc Setup
 %chocodir% uninstall AzureArcSetup --source WindowsFeatures >> report.txt
 
+:: Disable Server Manager at Startup
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager" /v "DoNotOpenServerManagerAtLogon" /t REG_DWORD /d "1" /f >> report.txt
+
+:: Enable Sound
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
+reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
+
+:: Taskbar Tweaks
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f >> report.txt
+
+reg add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f >> report.txt
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Feeds" /v "ShellFeedsTaskbarViewMode" /t REG_DWORD /d "2" /f >> report.txt
+
+reg add "HKCU\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize" /v "EnableTransparency" /t REG_DWORD /d "0" /f >> report.txt
+
+reg add "HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer" /v "DisableActionCenter" /t REG_DWORD /d "1" /f >> report.txt
+
+::
 :Dependencies
 ::
 :: Installation of required dependencies and a Web Browser
