@@ -78,7 +78,7 @@ powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.Service
 %chocodir% install WirelessNetworking --source WindowsFeatures >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
-:: Enable Sound
+:: Enable Sound Services
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\Audiosrv" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\AudioEndpointBuilder" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
 
@@ -102,7 +102,8 @@ net user Administrator "" /active:yes >> report.txt
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ServerManager" /v "DoNotOpenServerManagerAtLogon" /t REG_DWORD /d "1" /f >> report.txt
 
 :: Taskbar & Explorer QOL
-taskkill /f /im explorer.exe
+taskkill /f /im explorer.exe >> report.txt
+
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f >> report.txt
 
 reg add "HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f >> report.txt
