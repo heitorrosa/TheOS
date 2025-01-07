@@ -25,28 +25,12 @@ mode 72,12 >NUL 2>&1
 
 :: ================================================================================================================
 
-
-
-:os_checker
-::
-:: Windows Server 2025 & Windows Server 2022 Support Checker
-::
-
-:: Server 2025 = S25
-:: Server 2022 = S22
-
 call :TheOS
 
 for /f "tokens=*" %%a in ('systeminfo ^| findstr /B /C:"OS Name"') do set OS_NAME=%%a
 
 if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standard" (
-    set OS_VERSION=S22 & echo S22 >> report.txt
     goto device_checker
-
-) else if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2025 Standard" (
-    set OS_VERSION=S25 & echo S25 >> report.txt
-    goto device_checker
-
 
 ) else (
     echo Your Windows Version is not supported
@@ -86,10 +70,6 @@ set "chocodir=C:\ProgramData\chocolatey\choco.exe"
 powershell Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://community.chocolatey.org/install.ps1')) >> report.txt
 %chocodir% feature enable -n=allowGlobalConfirmation  >> report.txt & %chocodir% feature enable -n useFipsCompliantChecksums >> report.txt & %chocodir% upgrade all >> report.txt
 
-
-:: Adds a Run Registry for continuing the script
-echo y | reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v TheOS /t REG_SZ /d "%~dpnx0" >> report.txt
-
 :: Installation of the Wireless Connectivity
 %chocodir% install WirelessNetworking --source WindowsFeatures >> report.txt
 reg add "HKLM\System\CurrentControlSet\Services\wlansvc" /v "Start" /t REG_DWORD /d "2" /f >> report.txt
@@ -102,13 +82,6 @@ powershell rm -force c:\secpol.cfg -confirm:$false >> report.txt
 
 :: Remove the User's Account Password
 net user Administrator "" /active:yes >> report.txt
-
-:: Install Powershell Windows Update Service and Run Updates
-%chocodir% install PSWindowsUpdate >> report.txt
-MinSudo powershell Get-WuInstall -AcceptAll -AutoReboot >> report.txt
-
-:: Remove the Run entry from the System if needed
-echo y | reg delete "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run" /v TheOS >> report.txt
 
 :: Uninstall Azure Arc Setup
 %chocodir% uninstall AzureArcSetup --source WindowsFeatures >> report.txt
