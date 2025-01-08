@@ -135,11 +135,19 @@ reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "AutoEndTasks" /t REG_DWORD
 ::
 :: Installation of required dependencies and a Web Browser
 ::
-
 call :TheOS
 
+:: Installing required Visual C++ Runtimes
+curl -g -k -L -# -o "C:\Windows\Temp\vcredist.exe" "https://github.com/abbodi1406/vcredist/releases/latest/download/VisualCppRedist_AIO_x86_x64.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\vcredist.exe /aiA " >NUL 2>&1
+timeout /t 5 /nobreak >NUL 2>&1
 
+:: Installing DirectX
+curl -g -k -L -# -o "C:\Windows\Temp\dxwebsetup.exe" "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\dxwebsetup.exe /Q" >NUL 2>&1
+timeout /t 5 /nobreak >NUL 2>&1
 
+:: Installing Thorium AVX2
+curl -g -k -L -# -o "C:\Windows\Temp\ThoriumAVX2.exe" "https://github.com/Alex313031/Thorium-Win/releases/latest/download/thorium_AVX2_mini_installer.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\ThoriumAVX2.exe /S" >NUL 2>&1
+timeout /t 5 /nobreak >NUL 2>&1
 
 pause & exit /b
 
