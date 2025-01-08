@@ -131,6 +131,9 @@ reg add "HKEY_USERS\.DEFAULT\Keyboard Layout\Toggle" /v "Layout HotKey" /t REG_D
 
 reg add "HKEY_CURRENT_USER\Control Panel\Desktop" /v "AutoEndTasks" /t REG_DWORD /d "1" /f >> report.txt
 
+:: Changing ps1 file association with a proper PowerShell terminal
+echo y | reg add "HKCR\Microsoft.PowerShellScript.1\Shell\Open\Command" /ve /t REG_SZ /d "\"C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe\" -File \"%%1\" >> report.txt
+
 :Dependencies
 ::
 :: Installation of required dependencies and a Web Browser
@@ -147,6 +150,19 @@ timeout /t 5 /nobreak >NUL 2>&1
 
 :: Installing Thorium AVX2
 curl -g -k -L -# -o "C:\Windows\Temp\ThoriumAVX2.exe" "https://github.com/Alex313031/Thorium-Win/releases/latest/download/thorium_AVX2_mini_installer.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\ThoriumAVX2.exe /S" >NUL 2>&1
+timeout /t 5 /nobreak >NUL 2>&1
+
+:: Installing 7zip
+curl -g -k -L -# -o "C:\Windows\Temp\7zip.exe" "https://www.7-zip.org/a/7z2301-x64.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\7zip.exe /S" >NUL 2>&1
+timeout /t 5 /nobreak >NUL 2>&1
+
+:: Importing 7zip Context Menu
+reg add HKCU\SOFTWARE\7-Zip\FM\Columns /v RootFolder /t REG_BINARY /d 01,00,00,00,00,00,00,00,01,00,00,00,04,00,00,00,01,00,00,00,a0,00,00,00 /f >> report.txt
+reg add HKCU\SOFTWARE\7-Zip\Options /v CascadeMenu /t REG_DWORD /d 0 /f >> report.txt
+reg add HKCU\SOFTWARE\7-Zip\Options /v ContextMenu /t REG_DWORD /d 261 /f >> report.txt
+reg add HKCU\SOFTWARE\7-Zip\Options /v CascadedMenu /t REG_DWORD /d 0 /f >> report.txt
+reg add HKCU\SOFTWARE\7-Zip\Options /v MenuIcons /t REG_DWORD /d 1 /f >> report.txt
+reg add HKCU\SOFTWARE\7-Zip\Options /v ElimDupExtract /t REG_DWORD /d 1 /f >> report.txt
 timeout /t 5 /nobreak >NUL 2>&1
 
 pause & exit /b
