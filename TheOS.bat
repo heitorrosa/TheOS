@@ -165,6 +165,10 @@ reg add HKCU\SOFTWARE\7-Zip\Options /v MenuIcons /t REG_DWORD /d 1 /f >> report.
 reg add HKCU\SOFTWARE\7-Zip\Options /v ElimDupExtract /t REG_DWORD /d 1 /f >> report.txt
 timeout /t 5 /nobreak >NUL 2>&1
 
+:: Installing MSI Afterburner & Inserting Basic Settings
+curl -g -k -L -# -o "C:\Windows\Temp\MSI Afterburner.zip" "https://www.guru3d.com/getdownload/2c1b2414f56a6594ffef91236a87c0e976d52e0518b43f3846bab016c2f20c7c4d6ce7dfe19a0bc843da8d448bbb670058b0c9ee9a26f5cf49bc39c97da070e6eb314629af3da2d24ab0413917f73b946419b5af447da45cefb517a0840ad3003abff4f9d5fe7828bbbb910ee270b20632035fba6a450da22325b6bc5b6ecf760e598e0a09bb89139806376c01a72748cf45d6a798a241ec0787b63b8696336ce1e485eef0fbcdb6340fa3d74b142d1660f4038f9b6a10bd4d30634e03bb2790016d3b73e764a02a0e1d0633216fa76c5c1a0f8ee6671f41415a" >> report.txt
+"C:\Program Files\7-Zip\7z.exe" e "C:\Windows\Temp\MSI Afterburner.zip" -oC:\Windows\Temp *.exe -r >> report.txt
+"C:\Windows\Temp\MSIAfterburnerSetup466Beta3.exe" /S >> report.txt
 pause & exit /b
 
 
