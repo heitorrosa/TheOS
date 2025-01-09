@@ -157,7 +157,6 @@ curl -g -k -L -# -o "C:\Windows\Temp\7zip.exe" "https://www.7-zip.org/a/7z2301-x
 timeout /t 5 /nobreak >NUL 2>&1
 
 :: Importing 7zip Context Menu
-reg add HKCU\SOFTWARE\7-Zip\FM\Columns /v RootFolder /t REG_BINARY /d 01,00,00,00,00,00,00,00,01,00,00,00,04,00,00,00,01,00,00,00,a0,00,00,00 /f >> report.txt
 reg add HKCU\SOFTWARE\7-Zip\Options /v CascadeMenu /t REG_DWORD /d 0 /f >> report.txt
 reg add HKCU\SOFTWARE\7-Zip\Options /v ContextMenu /t REG_DWORD /d 261 /f >> report.txt
 reg add HKCU\SOFTWARE\7-Zip\Options /v CascadedMenu /t REG_DWORD /d 0 /f >> report.txt
