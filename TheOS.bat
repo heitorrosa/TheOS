@@ -21,7 +21,7 @@ for /F %%a in ('echo prompt $E ^| cmd') do (
 )
 SETLOCAL EnableDelayedExpansion
 chcp 65001 >NUL 2>&1
-:: mode 117,58 >NUL 2>&1
+mode 117,58 >NUL 2>&1
 
 :: ================================================================================================================
 
@@ -196,10 +196,38 @@ echo.
 echo.
 echo.
 echo.
-echo.                                                                                   ▄▀▀▀█▀▀▄  ▄▀▀▄ ▄▄   ▄▀▀█▄▄▄▄      ▄▀▀▀▀▄   ▄▀▀▀▀▄ 
-echo.                                                                                  █    █  ▐ █  █   ▄▀ ▐  ▄▀   ▐     █      █ █ █   ▐ 
-echo.                                                                                  ▐   █     ▐  █▄▄▄█    █▄▄▄▄▄      █      █    ▀▄   
-echo.                                                                                     █         █   █    █    ▌      ▀▄    ▄▀ ▀▄   █  
-echo.                                                                                   ▄▀         ▄▀  ▄▀   ▄▀▄▄▄▄         ▀▀▀▀    █▀▀▀   
-echo.                                                                                  █          █   █     █    ▐                 ▐      
+echo.
+echo.
+echo.
+echo.
+echo.  ▄▀▀▀█▀▀▄  ▄▀▀▄ ▄▄   ▄▀▀█▄▄▄▄      ▄▀▀▀▀▄   ▄▀▀▀▀▄ 
+echo. █    █  ▐ █  █   ▄▀ ▐  ▄▀   ▐     █      █ █ █   ▐ 
+echo. ▐   █     ▐  █▄▄▄█    █▄▄▄▄▄      █      █    ▀▄   
+echo.    █         █   █    █    ▌      ▀▄    ▄▀ ▀▄   █  
+echo.  ▄▀         ▄▀  ▄▀   ▄▀▄▄▄▄         ▀▀▀▀    █▀▀▀   
+echo. █          █   █     █    ▐                 ▐      
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo. 
+echo.
+echo.
+echo.
+echo.
 goto :eof
