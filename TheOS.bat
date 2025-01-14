@@ -4,13 +4,6 @@ title TheOS @heitorrosa
 :: Execute the script as administrator (Not needeed, UAC already disabled)
 cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/k cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 
-:: Maximize the Terminal Window
-if not defined iammaximized (
-    set iammaximized=1
-    start /max "" "%0" "%*"
-    exit
-)
-
 :: Checks if MinSudo exists in System and installs it if needed
 if not exist "C:\Windows\System32\MinSudo.exe" (
    curl -g -k -L -# -o "C:\Windows\System32\MinSudo.exe" "https://github.com/heitorrosa/TheOS/raw/theOS/files/MinSudo.exe" >NUL 2>&1
@@ -28,7 +21,7 @@ for /F %%a in ('echo prompt $E ^| cmd') do (
 )
 SETLOCAL EnableDelayedExpansion
 chcp 65001 >NUL 2>&1
-:: mode 72,12 >NUL 2>&1
+:: mode 117,58 >NUL 2>&1
 
 :: ================================================================================================================
 
