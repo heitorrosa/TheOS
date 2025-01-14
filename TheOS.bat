@@ -23,7 +23,7 @@ SETLOCAL EnableDelayedExpansion
 chcp 65001 >NUL 2>&1
 mode 117,58 >NUL 2>&1
 
-:: taskkill /f /im explorer.exe
+:: taskkill /f /im explorer.exe >NUL 2>&1
 
 :: ================================================================================================================
 
@@ -35,7 +35,7 @@ if "%OS_NAME%"=="OS Name:                   Microsoft Windows Server 2022 Standa
     goto device_checker
 
 ) else (
-    echo Your Windows Version is not supported
+    echo Your Windows Version is not supported, please install Windows Server 2022 Standard
     pause & exit /b
 )
 
