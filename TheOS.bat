@@ -143,19 +143,19 @@ echo y | reg add "HKCR\Microsoft.PowerShellScript.1\Shell\Open\Command" /ve /t R
 call :TheOS
 
 :: Installing required Visual C++ Runtimes
-curl -g -k -L -# -o "C:\Windows\Temp\vcredist.exe" "https://github.com/abbodi1406/vcredist/releases/latest/download/VisualCppRedist_AIO_x86_x64.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\vcredist.exe /aiA " >NUL 2>&1
+curl -g -k -L -# -o "C:\Windows\Temp\vcredist.exe" "https://github.com/abbodi1406/vcredist/releases/latest/download/VisualCppRedist_AIO_x86_x64.exe" >NUL 2>&1 & powershell Start-Process -FilePath "C:\Windows\Temp\vcredist.exe /aiA " >NUL 2>&1
 timeout /t 5 /nobreak >NUL 2>&1
 
 :: Installing DirectX
-curl -g -k -L -# -o "C:\Windows\Temp\dxwebsetup.exe" "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\dxwebsetup.exe /Q" >NUL 2>&1
+curl -g -k -L -# -o "C:\Windows\Temp\dxwebsetup.exe" "https://download.microsoft.com/download/1/7/1/1718CCC4-6315-4D8E-9543-8E28A4E18C4C/dxwebsetup.exe" >NUL 2>&1 & powershell Start-Process -FilePath "C:\Windows\Temp\dxwebsetup.exe /Q" >NUL 2>&1
 timeout /t 5 /nobreak >NUL 2>&1
 
 :: Installing Thorium AVX2
-curl -g -k -L -# -o "C:\Windows\Temp\ThoriumAVX2.exe" "https://github.com/Alex313031/Thorium-Win/releases/latest/download/thorium_AVX2_mini_installer.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\ThoriumAVX2.exe /S" >NUL 2>&1
+curl -g -k -L -# -o "C:\Windows\Temp\ThoriumAVX2.exe" "https://github.com/Alex313031/Thorium-Win/releases/latest/download/thorium_AVX2_mini_installer.exe" >NUL 2>&1 & powershell Start-Process -FilePath "C:\Windows\Temp\ThoriumAVX2.exe /S" >NUL 2>&1
 timeout /t 5 /nobreak >NUL 2>&1
 
 :: Installing 7zip
-curl -g -k -L -# -o "C:\Windows\Temp\7zip.exe" "https://www.7-zip.org/a/7z2301-x64.exe" >> report.txt & powershell Start-Process -FilePath "C:\Windows\Temp\7zip.exe /S" >NUL 2>&1
+curl -g -k -L -# -o "C:\Windows\Temp\7zip.exe" "https://www.7-zip.org/a/7z2301-x64.exe" >NUL 2>&1 & powershell Start-Process -FilePath "C:\Windows\Temp\7zip.exe /S" >NUL 2>&1
 timeout /t 5 /nobreak >NUL 2>&1
 
 :: Importing 7zip Context Menu
@@ -167,9 +167,8 @@ reg add HKCU\SOFTWARE\7-Zip\Options /v ElimDupExtract /t REG_DWORD /d 1 /f >> re
 timeout /t 5 /nobreak >NUL 2>&1
 
 :: Installing MSI Afterburner & Inserting Basic Settings
-curl -g -k -L -# -o "C:\Windows\Temp\MSI Afterburner.zip" "https://www.guru3d.com/getdownload/2c1b2414f56a6594ffef91236a87c0e976d52e0518b43f3846bab016c2f20c7c4d6ce7dfe19a0bc843da8d448bbb670058b0c9ee9a26f5cf49bc39c97da070e6eb314629af3da2d24ab0413917f73b946419b5af447da45cefb517a0840ad3003abff4f9d5fe7828bbbb910ee270b20632035fba6a450da22325b6bc5b6ecf760e598e0a09bb89139806376c01a72748cf45d6a798a241ec0787b63b8696336ce1e485eef0fbcdb6340fa3d74b142d1660f4038f9b6a10bd4d30634e03bb2790016d3b73e764a02a0e1d0633216fa76c5c1a0f8ee6671f41415a" >> report.txt
-"C:\Program Files\7-Zip\7z.exe" e "C:\Windows\Temp\MSI Afterburner.zip" -oC:\Windows\Temp *.exe -r >> report.txt
-"C:\Windows\Temp\MSIAfterburnerSetup466Beta3.exe" /S >> report.txt
+curl -g -k -L -# -o "C:\Windows\Temp\MSI Afterburner.zip" "https://download.msi.com/uti_exe/vga/MSIAfterburnerSetup.zip?__token__=exp=1736792286~acl=/*~hmac=8b8c67aac5f4a1edc0620a4cc41733ecab7c0da6669997e30d0285d89e31eea5" >NUL 2>&1
+"C:\Program Files\7-Zip\7z.exe" e "C:\Windows\Temp\MSI Afterburner.zip" -oC:\Windows\Temp *.exe -r >> report.txt & "C:\Windows\Temp\MSIAfterburnerSetup466Beta3.exe" /S >> report.txt
 pause & exit /b
 
 
