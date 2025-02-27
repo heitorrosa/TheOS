@@ -8,6 +8,6 @@ TheOS is an open-source custom Windows OS with support for Windows Server 2022 S
 
 <br>
 
-> # **⚠️ Warning**
+> [!CAUTION]
 > This repository is **INCOMPLETE** and **DEPRECATED** and will probably not recieve any further commits, just install Windows 11 24h2 with the latest patch and use [Valley of Doom's](https://github.com/valleyofdoom/PC-Tuning) guide for tweaking it, please dont install it and dont run it!
 #
